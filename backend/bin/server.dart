@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -71,30 +70,29 @@ void main(List<String> args) async {
     requestHandler: (req) {
       if (req.method == "OPTIONS") {
         return Response.ok('', headers: {
-          'Acceess-Control-Allow-Origin': '*',
-          'Acceess-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,HEAD',
-          'Acceess-Control-Allow-Headers': 'Content-Type,Authorization',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,HEAD',
+          'Access-Control-Allow-Headers': 'Content-Type,Authorization',
         });
       }
       return null;
     },
     responseHandler: (res) {
       return res.change(headers: {
-         'Acceess-Control-Allow-Origin': '*',
-          'Acceess-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,HEAD',
-          'Acceess-Control-Allow-Headers': 'Content-Type,Authorization',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,HEAD',
+        'Access-Control-Allow-Headers': 'Content-Type,Authorization',
       });
     },
   );
   // Configure a pipeline that logs requests.
-  final handler =
-      Pipeline()
+  final handler = Pipeline()
       .addMiddleware(corsHeader)
       .addMiddleware(logRequests())
       .addHandler(_router.call);
 
   // For running in containers, we respect the PORT environment variable.
   final port = int.parse(Platform.environment['PORT'] ?? '8080');
-  final server = await serve(handler, ip, port);
-  print('Server đang chạy tại http://${server.address.host}:${server.port}');
+  final sever = await serve(handler, ip, port);
+  print('Server đang chạy tại  http://${sever.address.host}: ${sever.port}');
 }
