@@ -16,13 +16,19 @@
             "cwd": "fontend",
             "request": "launch",
             "type": "dart",
-          "args": [
-            "-d",
-            "chrome",
-            "--web-port",
-            "8081"
-          ]
+         
         },
-     
+        {
+          "name": "fontend",
+          "cwd": "fontend",
+          "request": "launch",
+          "type": "dart",
+        "args": [
+          "-d",
+          "chrome",
+          "--web-port",
+          "8081"
+        ]
+      },
     ]
 }
